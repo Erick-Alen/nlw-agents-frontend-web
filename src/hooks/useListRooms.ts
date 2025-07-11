@@ -1,11 +1,5 @@
+import type { getRoomsAPIResponse } from '@/components/http/types/getRoomsResponse';
 import { useQuery } from '@tanstack/react-query';
-
-type getRoomsAPIResponse = {
-  id: string;
-  name: string;
-  description: string;
-  createdAt: string;
-};
 
 export const useGetRooms = () => {
   const { data, isLoading } = useQuery({
