@@ -3,6 +3,7 @@ import type {
   CreateRoomRequest,
   CreateRoomResponse,
 } from '@/components/http/types/createRooms';
+import { storageKeys } from './storageKeys';
 
 export const useCreateRoom = () => {
   const queryclient = useQueryClient();
@@ -22,7 +23,7 @@ export const useCreateRoom = () => {
       return res;
     },
     onSuccess: () => {
-      queryclient.invalidateQueries({ queryKey: ['rooms'] });
+      queryclient.invalidateQueries({ queryKey: storageKeys.rooms });
       // Optionally, you can handle success actions here, like showing a toast or redirecting
     },
   });

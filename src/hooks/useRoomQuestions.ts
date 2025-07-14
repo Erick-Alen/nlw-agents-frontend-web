@@ -1,17 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import type { getRoomsAPIResponse } from '@/components/http/types/getRoomsResponse';
+import type { GetRoomQuestionsResponse } from '@/components/http/types/getRoomQuestionsResponse';
 import { storageKeys } from './storageKeys';
 
-export const useGetRooms = () => {
+export const useGetRoomQuestions = (roomId: string) => {
   const { data, isLoading } = useQuery({
-    queryKey: storageKeys.rooms,
+    queryKey: storageKeys.getQuestions(roomId),
     queryFn: async () => {
-      const response = await fetch('http://localhost:3333/rooms');
+      const response = await fetch(
+        `http://localhost:3333/rooms/${roomId}/questions`
+      );
 
       if (!response.ok) {
         throw new Error('Failed to fetch rooms');
       }
-      const res: getRoomsAPIResponse[] = await response.json();
+      const res: GetRoomQuestionsResponse[] = await response.json();
       return res;
     },
     refetchOnWindowFocus: false,
